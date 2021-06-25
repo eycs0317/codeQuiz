@@ -1,3 +1,28 @@
 body {
-  color: aquamarine;
+
+}
+header {
+
+  text-align: center;
+  font-size: 30px;
+}
+header h1 {
+  color: rgb(62, 45, 223);
+  text-align: center;
+  font-size: 50px;
+}
+
+header button {
+  width: 90px;
+  height: 40px;
+  font-size: 25px;
+  background-color: rgb(173, 168, 226);
+}
+
+.timer {
+  text-align: center;
+}
+
+.question {
+  text-align: center;
 }
