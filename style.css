@@ -20,20 +20,20 @@ header button {
 }
 
 .timer {
-  /* display: none; */
+  display: none;
   text-align: center;
 }
 
 .questions {
-  /* display: none; */
+  display: none;
   text-align: center;
 }
 
 .done {
-  /* display: none; */
+  display: none;
 }
 .scoreboard {
-  /* display: none; */
+  display: none;
 }
 
 .choice-lists {
