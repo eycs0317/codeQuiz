@@ -7,9 +7,14 @@ let startButton = document.querySelector('.startButton')
 let time = document.querySelector('.time')
 let question = document.querySelector('.question')
 let ul = document.querySelector('.choice-lists')
+let showScore = document.querySelector('.show-score')
+let submitButton = document.querySelector('#submit')
+let userName = document.querySelector('#name')
+let showAnswer = document.querySelector('.show-answer')
 let scoreboard = {
   player1: 10,
 }
+let currentScore = 0;
 let startTime = 101;
 let userAnswer = null;
 let questionNum = 0;
@@ -17,11 +22,7 @@ let questionNum = 0;
 
 //event
 startButton.addEventListener('click', () => {
-  timer();
-  displayQuestion();
-  questionElement.style.display = 'block';
-  timerElement.style.display = 'block';
-  headerElement.style.display = 'none'
+  start();
 });
 
 
@@ -43,9 +44,14 @@ const questions = [
   }
 ]
 
+
 //when start button click - header-no, question and answer - yes
 function start() {
-
+  timer();
+  displayQuestion();
+  questionElement.style.display = 'block';
+  timerElement.style.display = 'block';
+  headerElement.style.display = 'none'
 }
 
 
@@ -62,41 +68,75 @@ function timer() {
 }
 //display questions
 function displayQuestion() {
+  if((questions[questionNum]) === undefined) {
+    // setTimeout(gameOver, 1000)
+    gameOver();
+    return;
+  } else {
+    question.innerText = questions[questionNum].question
+    questions[questionNum].choice.forEach((element, index) => {
+    let li = document.createElement('li');
+    li.innerText = element;
+    li.setAttribute('index', index)
+    ul.appendChild(li)
 
-  question.innerText = questions[questionNum].question
-  questions[questionNum].choice.forEach((element, index) => {
-  let li = document.createElement('li');
-  li.innerText = element;
-  li.setAttribute('name', index)
-  ul.appendChild(li)
+    li.addEventListener('click', () => {
+      userAnswer = li.getAttribute('index')
+      if(userAnswer === questions[questionNum].answer) {
+        console.log('correct')
+        currentScore+=1
+        // ul.innerHTML = ''
+        console.log(showAnswer.innerText)
+        showAnswer.innerText = 'Correct!!'
+        clearMessage()
+      } else {
+        console.log('wrong')
+        startTime-=10;
+        // ul.innerHTML = ''
+        showAnswer.innerText = 'Wrong!!'
+        clearMessage()
+      }
+      questionNum++;
+      setTimeout(displayQuestion,1000)
+      console.log('currentScore', currentScore)
+    })
 
-  li.addEventListener('click', () => {
-    userAnswer = li.getAttribute('name')
-    console.log(typeof userAnswer)
-    console.log('questions[questionNum].answer', typeof questions[questionNum].answer)
-    if(userAnswer === questions[questionNum].answer) {
-      console.log('correct')
-    } else {
-      // - 10 sec from timer
-      console.log('wrong')
-    }
-    questionNum++;
 
   })
+  }
 
-
-})
 }
 
-//when the game is over
+//when are questions are answer or time is over
 function gameOver() {
-
+  console.log('no more questions')
+  questionElement.style.display = 'none';
+  timerElement.style.display = 'none';
+  doneElement.style.display = 'block'
+  showScore.innerText = `Your final Score is ${currentScore}/3`
 }
 
+//function for the username to submit name
+function submitName(e) {
+  e.preventDefault();
+  if(userName.value === '') {
+    console.log('no name was input')
+  } else {
+    scoreboard[userName.value] = currentScore;
+    localStorage.setItem('score', JSON.stringify(scoreboard))
+    doneElement.style.display = 'none';
+    scoreboardElement.style.display = 'block'
+  }
+}
+submitButton.addEventListener('click', submitName)
 
-
-
-
-
+//function to clear the correct/wrong message
+function clearMessage() {
+  // setTimeout(() => showAnswer.innerText = '',1000)
+  setTimeout(() => {
+    ul.innerHTML = ''
+    showAnswer.innerText = ''
+  },1000)
+}
 //work
 // questionElement.style.display = 'none'
