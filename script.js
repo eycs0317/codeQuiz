@@ -26,7 +26,7 @@ let questionNum = 0;
 startButton.addEventListener('click', start)
 submitButton.addEventListener('click', submitName)
 goBackButton.addEventListener('click', goBack)
-//clearScoreButton.addEventListener('click', )
+clearScoreButton.addEventListener('click', clearScore)
 
 
 const questions = [
@@ -193,5 +193,5 @@ function goBack () {
 //clear Score function
 function clearScore() {
   localStorage.removeItem('data');
-  localStorage.clear()
+  scoreboardList.innerHTML = ''
 }
