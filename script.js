@@ -6,12 +6,15 @@ let scoreboardElement = document.querySelector('.scoreboard');
 let startButton = document.querySelector('.startButton')
 let time = document.querySelector('.time')
 let question = document.querySelector('.question')
-let ul = document.querySelector('.choice-lists')
+let questionList = document.querySelector('.choice-lists')
 let showScore = document.querySelector('.show-score')
 let submitButton = document.querySelector('#submit')
 let userName = document.querySelector('#name')
 let showAnswer = document.querySelector('.show-answer')
 let nameAndScore = document.querySelector("name-and-score")
+let scoreboardList = document.querySelector('.scoreboard-list')
+let goBackButton = document.querySelector('#go-back-btn')
+let clearScoreButton = document.querySelector('#clear-score-btn')
 let scoreboard = [];
 let currentScore = 0;
 let startTime = 51;
@@ -22,6 +25,8 @@ let questionNum = 0;
 //event
 startButton.addEventListener('click', start)
 submitButton.addEventListener('click', submitName)
+goBackButton.addEventListener('click', goBack)
+//clearScoreButton.addEventListener('click', )
 
 
 const questions = [
@@ -92,18 +97,18 @@ function displayQuestion() {
     let li = document.createElement('li');
     li.innerText = element;
     li.setAttribute('index', index)
-    ul.appendChild(li)
+    questionList.appendChild(li)
 
     li.addEventListener('click', () => {
       userAnswer = li.getAttribute('index')
       if(userAnswer === questions[questionNum].answer) {
         currentScore+=1
-        ul.innerHTML = ''
+        questionList.innerHTML = ''
         showAnswer.innerText = 'Correct!!'
         clearMessage()
       } else {
         startTime-=10;
-        ul.innerHTML = ''
+        questionList.innerHTML = ''
         showAnswer.innerText = 'Wrong!!'
         clearMessage()
       }
@@ -131,14 +136,14 @@ function submitName(e) {
   } else {
     var data = JSON.parse(localStorage.getItem('data'));
     if(!data) {
-      console.log('no data')
       scoreboard.push({name:userName.value, score: currentScore})
-      console.log('here')
       localStorage.setItem('data', JSON.stringify(scoreboard))
+      displayUsernameAndScore(scoreboard)
+
     } else {
       data.push({name:userName.value, score: currentScore})
       localStorage.setItem('data', JSON.stringify(data))
-      console.log('data', data)
+      displayUsernameAndScore(data)
     }
     // data.push({name:userName.value, score: currentScore});
     // console.log(data)
@@ -159,9 +164,34 @@ function clearMessage() {
 }
 
 //display username and score
-function displayUsernameAndScore() {
-  var data = JSON.parse(localStorage.getItem('score'))
+function displayUsernameAndScore(data) {
+  doneElement.style.display = 'none'
+  scoreboardElement.style.display ='block'
+  //sorted by Score
+  let sorted = data.sort((a, b) => {
+    console.log('a', a.name)
+    console.log('b', b.score)
+    return b.score - a.score;
+  })
+  console.log('sorted data', sorted)
+  sorted.forEach(user => {
+    let eachUser = document.createElement('li');
+    eachUser.innerText = `${user.name} - ${user.score}`
+    console.log(eachUser)
+    console.log('scoreboardList', scoreboardList)
+    scoreboardList.appendChild(eachUser);
+  })
+}
 
 
-  // nameAndScore.innerText = `${} ${}`
+//go back function
+function goBack () {
+  scoreboardElement.style.display = 'none';
+  headerElement.style.display = 'block'
+}
+
+//clear Score function
+function clearScore() {
+  localStorage.removeItem('data');
+  localStorage.clear()
 }

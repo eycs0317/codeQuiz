@@ -43,7 +43,7 @@ header button {
   text-align: center;
 }
 
-.choice-lists {
+.choice-lists , .scoreboard-list {
   list-style-type:none;
 }
 
