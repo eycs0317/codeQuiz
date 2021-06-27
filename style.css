@@ -28,14 +28,37 @@ header button {
   display: none;
   text-align: center;
 }
+.question {
+  background-color: blueviolet;
+
+
+}
 
 .done {
   display: none;
+  text-align: center;
 }
 .scoreboard {
   display: none;
+  text-align: center;
 }
 
 .choice-lists {
   list-style-type:none;
+}
+
+ul li {
+  background-color: rgb(173, 168, 226);
+  margin: 5px auto;
+  width:20%;
+  text-align: left;
+  padding: 10px;
+}
+
+ul li:hover {
+  background-color: rgb(76, 72, 121);
+}
+
+ul li:active {
+  background-color: blue;
 }
