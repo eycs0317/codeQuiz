@@ -139,6 +139,7 @@ function gameOver() {
   questionElement.style.display = 'none';
   timerElement.style.display = 'none';
   doneElement.style.display = 'block'
+
   showScore.innerText = `Your final Score is ${currentScore}/${questions.length}`
 }
 

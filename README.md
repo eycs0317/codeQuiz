@@ -31,5 +31,6 @@ git clone https://github.com/awolrob/code-quiz.git
 Eddie Yeung
 
 ## Images
-![example1]()
-![example2](/Images/image2.png)
+![example1](/images/01.png)
+![example2](/images/02.png)
+![example3](/images/03.png)
