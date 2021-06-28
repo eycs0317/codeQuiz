@@ -21,7 +21,7 @@ let scoreboardList = document.querySelector('.scoreboard-list')
 
 let scoreboard = [];
 let currentScore = 0;
-let startTime = 11;
+let startTime = 75;
 let userAnswer = null;
 let questionNum = 0;
 let allQuestionsAnswered = false;
@@ -84,7 +84,7 @@ function timer() {
   console.log('timer start')
   var intervalKey = setInterval(() => {
     startTime--;
-    time.innerText = startTime
+    time.innerText = `Time: ${startTime}`
     if(startTime <= 0 || allQuestionsAnswered) {
       console.log('timer end')
       clearInterval(intervalKey);
@@ -113,11 +113,13 @@ function displayQuestion() {
       if(userAnswer === questions[questionNum].answer) {
         currentScore+=1
         answerList.innerHTML = ''
+        showAnswer.style.color = 'blue'
         showAnswer.innerText = 'Correct!!'
         clearMessage()
       } else {
         startTime-=10;
         answerList.innerHTML = ''
+        showAnswer.style.color = 'red'
         showAnswer.innerText = 'Wrong!!'
         clearMessage()
       }
@@ -132,7 +134,7 @@ function displayQuestion() {
 
 //when are questions are answer or time is over
 function gameOver() {
-  startTime = 21;
+  startTime = 75;
   answerList.innerHTML = ''
   questionElement.style.display = 'none';
   timerElement.style.display = 'none';
@@ -176,7 +178,6 @@ function clearMessage() {
 function displayUsernameAndScore(data) {
   scoreboardList.style.display = 'block'
   console.log('displayUsernameAndScore function call')
-  console.log('data', data)
   doneElement.style.display = 'none'
   scoreboardElement.style.display ='block'
   //sorted by Score
@@ -184,11 +185,9 @@ function displayUsernameAndScore(data) {
   let sorted = data.sort((a, b) => {
     return b.score - a.score;
   })
-  console.log('sorted', sorted)
   sorted.forEach(user => {
     let eachUser = document.createElement('li');
     eachUser.innerText = `${user.name} - ${user.score}`
-
     scoreboardList.appendChild(eachUser);
   })
 }

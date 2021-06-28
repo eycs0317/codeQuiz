@@ -10,40 +10,43 @@
 <body>
   <header class="header">
     <h1>Code Quiz</h1>
-    <p>Click button to start! You will have 60 second to answer all the questions. If answer is incorrect. 10 second with deduct from the timer. Good Luck!</p>
+    <p >Click button to start! You will have 75 second to answer all the questions. If answer is incorrect. 10 second with deduct from the timer. Good Luck!</p>
     <button id="start-btn">Start</button>
   </header>
 
-  <div class="timer">
-    <h2 class="time">Timer</h2>
-  </div>
+  <section class="timer">
+    <h2 class="time">Time: 75</h2>
+  </section>
 
-  <div class="questions">
-    <h3 class="question">question</h3>
+  <section class="questions">
+    <h3 class="question"></h3>
     <ul class="answer-lists">
 
     </ul>
     <p class="show-answer"></p>
-  </div>
+  </section>
 
-  <div class="done">
-    <h3>All Done!</h3>
+  <section class="done">
+    <h2>All Done!</h2>
     <p class="show-score">your final score</p>
     <form>
       <label>Your Name:</label>
       <input placeholder="Your Name" id="name">
       <button id="submit-btn">Submit</button>
     </form>
-  </div>
+  </section>
 
-  <div class="scoreboard">
-    <p>Scoreboard</p>
+  <section class="scoreboard">
+    <h2>Scoreboard</h2>
     <ul class="scoreboard-list">
 
     </ul>
-    <button id="go-back-btn">Go back</button>
-    <button id="clear-score-btn">clear high score</button>
-  </div>
+    <div class="back-and-clear-btn">
+      <button id="go-back-btn">Go back</button>
+      <button id="clear-score-btn">clear high score</button>
+    </div>
+
+  </section>
 
 
 

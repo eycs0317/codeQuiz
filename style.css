@@ -1,15 +1,26 @@
 body {
-
+  background-color: rgb(236, 234, 224);
 }
 header {
 
   text-align: center;
-  font-size: 30px;
 }
 header h1 {
   color: rgb(62, 45, 223);
   text-align: center;
   font-size: 50px;
+}
+p, .show-score {
+  padding: 10px 70px;
+  font-size: 30px;
+}
+h2 {
+  font-size: 35px;
+  color: rgb(62, 45, 223);
+}
+
+.time {
+  color: rgb(62, 45, 223);
 }
 
 button {
@@ -18,6 +29,12 @@ button {
   background-color: rgb(173, 168, 226);
   border-radius: 10px;
 }
+
+button:active {
+  background-color: blue;
+}
+
+
 
 .timer {
   display: none;
@@ -47,6 +64,10 @@ button {
   list-style-type:none;
 }
 
+.scoreboard-list {
+  margin-left: 50px auto;
+}
+
 ul li {
   background-color: rgb(173, 168, 226);
   margin: 5px auto;
@@ -55,10 +76,7 @@ ul li {
   padding: 10px;
 }
 
-ul li:hover {
+.answer-lists li:hover {
   background-color: rgb(76, 72, 121);
 }
 
-ul li:active {
-  background-color: blue;
-}
