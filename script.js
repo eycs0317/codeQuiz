@@ -3,23 +3,28 @@ let timerElement = document.querySelector('.timer');
 let questionElement = document.querySelector('.questions');
 let doneElement = document.querySelector('.done');
 let scoreboardElement = document.querySelector('.scoreboard');
-let startButton = document.querySelector('.startButton')
+
+let startButton = document.querySelector('#start-btn')
+let submitButton = document.querySelector('#submit-btn')
+let goBackButton = document.querySelector('#go-back-btn')
+let clearScoreButton = document.querySelector('#clear-score-btn')
+
 let time = document.querySelector('.time')
 let question = document.querySelector('.question')
-let questionList = document.querySelector('.choice-lists')
+let answerList = document.querySelector('.answer-lists')
 let showScore = document.querySelector('.show-score')
-let submitButton = document.querySelector('#submit')
+
 let userName = document.querySelector('#name')
 let showAnswer = document.querySelector('.show-answer')
 let nameAndScore = document.querySelector("name-and-score")
 let scoreboardList = document.querySelector('.scoreboard-list')
-let goBackButton = document.querySelector('#go-back-btn')
-let clearScoreButton = document.querySelector('#clear-score-btn')
+
 let scoreboard = [];
 let currentScore = 0;
-let startTime = 51;
+let startTime = 11;
 let userAnswer = null;
 let questionNum = 0;
+let allQuestionsAnswered = false;
 
 
 //event
@@ -76,39 +81,43 @@ function start() {
 
 //timer function
 function timer() {
+  console.log('timer start')
   var intervalKey = setInterval(() => {
     startTime--;
     time.innerText = startTime
-    if(startTime <= -1) {
+    if(startTime <= 0 || allQuestionsAnswered) {
+      console.log('timer end')
       clearInterval(intervalKey);
-      gameOver()
+      startTime = 21;
+      gameOver();
     }
   },1000)
 }
 //display questions
 function displayQuestion() {
   if((questions[questionNum]) === undefined) {
-    // setTimeout(gameOver, 1000)
+    console.log('no more question')
+    allQuestionsAnswered = true;
+    answerList.innerHTML = '';
     gameOver();
-    return;
   } else {
     question.innerText = questions[questionNum].question
     questions[questionNum].choice.forEach((element, index) => {
-    let li = document.createElement('li');
-    li.innerText = element;
-    li.setAttribute('index', index)
-    questionList.appendChild(li)
+    let eachAnswer = document.createElement('li');
+    eachAnswer.innerText = element;
+    eachAnswer.setAttribute('index', index)
+    answerList.appendChild(eachAnswer)
 
-    li.addEventListener('click', () => {
-      userAnswer = li.getAttribute('index')
+    eachAnswer.addEventListener('click', () => {
+      userAnswer = eachAnswer.getAttribute('index')
       if(userAnswer === questions[questionNum].answer) {
         currentScore+=1
-        questionList.innerHTML = ''
+        answerList.innerHTML = ''
         showAnswer.innerText = 'Correct!!'
         clearMessage()
       } else {
         startTime-=10;
-        questionList.innerHTML = ''
+        answerList.innerHTML = ''
         showAnswer.innerText = 'Wrong!!'
         clearMessage()
       }
@@ -120,8 +129,11 @@ function displayQuestion() {
   }
 }
 
+
 //when are questions are answer or time is over
 function gameOver() {
+  startTime = 21;
+  answerList.innerHTML = ''
   questionElement.style.display = 'none';
   timerElement.style.display = 'none';
   doneElement.style.display = 'block'
@@ -131,6 +143,8 @@ function gameOver() {
 //function for the username to submit name
 function submitName(e) {
   e.preventDefault();
+
+
   if(userName.value === '') {
     alert('Please input Name')
   } else {
@@ -145,12 +159,7 @@ function submitName(e) {
       localStorage.setItem('data', JSON.stringify(data))
       displayUsernameAndScore(data)
     }
-    // data.push({name:userName.value, score: currentScore});
-    // console.log(data)
-    // localStorage.setItem('score', JSON.stringify(scoreboard))
-    // scoreboardElement.style.display = 'block'
-    // doneElement.style.display = 'none';
-    // displayUsernameAndScore();
+
   }
 }
 
@@ -165,20 +174,21 @@ function clearMessage() {
 
 //display username and score
 function displayUsernameAndScore(data) {
+  scoreboardList.style.display = 'block'
+  console.log('displayUsernameAndScore function call')
+  console.log('data', data)
   doneElement.style.display = 'none'
   scoreboardElement.style.display ='block'
   //sorted by Score
+
   let sorted = data.sort((a, b) => {
-    console.log('a', a.name)
-    console.log('b', b.score)
     return b.score - a.score;
   })
-  console.log('sorted data', sorted)
+  console.log('sorted', sorted)
   sorted.forEach(user => {
     let eachUser = document.createElement('li');
     eachUser.innerText = `${user.name} - ${user.score}`
-    console.log(eachUser)
-    console.log('scoreboardList', scoreboardList)
+
     scoreboardList.appendChild(eachUser);
   })
 }
@@ -186,8 +196,24 @@ function displayUsernameAndScore(data) {
 
 //go back function
 function goBack () {
+  console.log('gobackfunctioncall')
+  // scoreboardElement.innerHTML = ''
+  // scoreboardList.style.display = 'none'
+  scoreboardList.innerHTML = ''
   scoreboardElement.style.display = 'none';
   headerElement.style.display = 'block'
+  allQuestionsAnswered = false
+  currentScore = 0;
+  userAnswer = null;
+  questionNum = 0;
+
+  scoreboard = [];
+  answerList.innerHTML = ''
+
+
+
+
+
 }
 
 //clear Score function

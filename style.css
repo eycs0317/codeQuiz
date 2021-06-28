@@ -12,11 +12,11 @@ header h1 {
   font-size: 50px;
 }
 
-header button {
-  width: 90px;
-  height: 40px;
-  font-size: 25px;
+button {
+  padding: 10px;;
+  font-size: 20px;
   background-color: rgb(173, 168, 226);
+  border-radius: 10px;
 }
 
 .timer {
@@ -29,7 +29,7 @@ header button {
   text-align: center;
 }
 .question {
-  background-color: blueviolet;
+  font-size: 30px;
 
 
 }
