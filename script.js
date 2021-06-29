@@ -25,9 +25,6 @@ let startTime = 75;
 let userAnswer = null;
 let questionNum = 0;
 let allQuestionsAnswered = false;
-console.log(scoreboard)
-console.log(currentScore)
-console.log(questionNum)
 
 
 //event
@@ -133,7 +130,6 @@ function displayQuestion() {
   })
   }
 }
-
 
 //when are questions are answer or time is over
 function gameOver() {
