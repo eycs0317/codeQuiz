@@ -180,8 +180,8 @@ function displayUsernameAndScore(data) {
   console.log('displayUsernameAndScore function call')
   doneElement.style.display = 'none'
   scoreboardElement.style.display ='block'
-  //sorted by Score
 
+  //sorted by Score
   let sorted = data.sort((a, b) => {
     return b.score - a.score;
   })
