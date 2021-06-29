@@ -25,6 +25,9 @@ let startTime = 75;
 let userAnswer = null;
 let questionNum = 0;
 let allQuestionsAnswered = false;
+console.log(scoreboard)
+console.log(currentScore)
+console.log(questionNum)
 
 
 //event
@@ -188,7 +191,7 @@ function displayUsernameAndScore(data) {
   })
   sorted.forEach(user => {
     let eachUser = document.createElement('li');
-    eachUser.innerText = `${user.name} - ${user.score}`
+    eachUser.innerText = `${user.name} - ${user.score}/6`
     scoreboardList.appendChild(eachUser);
   })
 }
@@ -196,24 +199,17 @@ function displayUsernameAndScore(data) {
 
 //go back function
 function goBack () {
+  location.reload()
   console.log('gobackfunctioncall')
-  // scoreboardElement.innerHTML = ''
-  // scoreboardList.style.display = 'none'
-  scoreboardList.innerHTML = ''
-  scoreboardElement.style.display = 'none';
-  headerElement.style.display = 'block'
-  allQuestionsAnswered = false
-  currentScore = 0;
-  userAnswer = null;
-  questionNum = 0;
-
-  scoreboard = [];
-  answerList.innerHTML = ''
-
-
-
-
-
+  // scoreboardList.innerHTML = ''
+  // scoreboardElement.style.display = 'none';
+  // headerElement.style.display = 'block'
+  // allQuestionsAnswered = false
+  // currentScore = 0;
+  // userAnswer = null;
+  // questionNum = 0;
+  // scoreboard = [];
+  // answerList.innerHTML = ''
 }
 
 //clear Score function
